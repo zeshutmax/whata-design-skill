@@ -29,3 +29,4 @@
 - `no-photography-physical-goods`: No photography exists (physical goods or services): the offer as the live object, type as image, or an honest gap. Styles: no-imagery, ecommerce-store, consumer-goods, specimen, professional-services, business-services
 - `urgent-help-route`: Urgent help routes on public-service and crisis pages: the emergency line once, a real phone route with hours, and the primary action still on the first screen. Styles: government-public, non-profit, medical, mental-health
 - `form-no-backend-and-privacy`: Forms with no backend: a mailto fallback, an honest success message, a privacy line and a rule for sensitive text. Styles: government-public, professional-services, local-community, non-profit
+- `real-data-as-the-picture`: Real data as the picture: the product's own true numbers as the hero or section visual. Styles: analytics-data, technical-diagram, specimen, product-screenshots

@@ -14,8 +14,9 @@
 8. Keep the heroes small; do not build the whole page yet.
 9. Show each concept beside its library anchors: the concept's key frame and the fold screenshots of the two or three library sites it takes its visual language from, on one sheet (`imageSheet` in @whata/audit, or put the anchor folds from storage/sites/ next to the concept in `cli sheet`). Name what each anchor gives (canvas, type, the object, the motion). If the frame does not visibly belong next to them, it is not in the library's language yet: change the canvas, type, spacing or object, not the concept. [Our take]
 10. Every frame a poster: the first frame of each concept is its best, with type, space and image composed on purpose; motion may only amplify it. Rough the signature moment in at least the concept you recommend (a still of its key frame is enough for the sheet), so the owner judges the idea, not a layout. [Our take, from the awwwards method]
-11. Make the sheets and stop: render_sheet (or the audit CLI's `sheet` command) puts the three concepts side by side, labelled with name and north star, one image per size (1440x900 and 390x844), with review_design run on each concept first. Send both sheets to the owner and ask gate 2's question (explore-directions). Nothing from decide-tokens onward starts, and nothing is built in the site tree, until the owner's pick is recorded. Screenshots of a single concept: `pnpm --silent --filter @whata/audit cli shot <file|url> <out.png> <width> <height>`.
-12. No photographs of a physical product? Follow the imagery plan in the direction matrix: build the live object (price, seats, dates, a calculator or booking control made of real HTML with real states and real numbers), or set a measurement, date or price large as real text, or leave the image out and mark the gap. Do not draw the product from shapes in code. A faint decorative gradient or texture that does not depict the product is ornament; one that starts to depict it (grooves that read as a wheel, a glaze) is an illustration and counts under `distinct-real-imagery-and-icons`. [Our take]
+11. Before the sheet, the option gate (protocol 4): each concept passes review_design with zero blockers and none of `distinct-hero-not-template`, `distinct-no-decorative-glow`, `distinct-no-accent-word-headline`, `distinct-eyebrow-restraint`, and one fresh critic scores each from its screenshots only (get_critic_brief). Fix and re-run a concept that fails; do not send it with a note.
+12. Make the sheets and stop: render_sheet (or the audit CLI's `sheet` command) puts the three concepts side by side, labelled with name and north star, one image per size (1440x900 and 390x844), with review_design run on each concept first. Send both sheets to the owner and ask gate 2's question (explore-directions). Nothing from decide-tokens onward starts, and nothing is built in the site tree, until the owner's pick is recorded. Screenshots of a single concept: `pnpm --silent --filter @whata/audit cli shot <file|url> <out.png> <width> <height>`.
+13. No photographs of a physical product? Follow the imagery plan in the direction matrix: build the live object (price, seats, dates, a calculator or booking control made of real HTML with real states and real numbers), or set a measurement, date or price large as real text, or leave the image out and mark the gap. Do not draw the product from shapes in code. A faint decorative gradient or texture that does not depict the product is ornament; one that starts to depict it (grooves that read as a wheel, a glaze) is an illustration and counts under `distinct-real-imagery-and-icons`. [Our take]
 ## Lean track (one-day)
 Applies only when the owner and you chose the lean track. In sprint and full tracks ignore this section.
 - type-color-studies and structure-wireframes are replaced by the draft tokens and the skeleton and hero rows of direction-matrix.md. Build every hero from those draft tokens.
@@ -33,6 +34,7 @@ Applies only when the owner and you chose the sprint track. In lean and full tra
 - `review_design`: path to the hero HTML; returns Quality Bar results
 - `render_sheet`: the three concept files; writes directions-desktop.png and directions-mobile.png
 - `compare_to_library`: each concept with its anchor slugs: gaps in scale contrast, whitespace, lead object and motion before the owner sees it
+- `get_critic_brief`: one fresh critic scores each concept from its screenshots only before the sheet goes out
 ## Output template
 ```markdown
 # Hero concepts
@@ -40,7 +42,8 @@ One folder per direction: hero-A/index.html, hero-A-desktop.png, hero-A-mobile.p
 directions-desktop.png and directions-mobile.png: the three side by side, labelled, sent to the owner.
 ```
 ## Gates
-Rules to satisfy: `ux-purpose-clear`, `ux-primary-cta-above-fold`, `ux-false-floor`, `distinct-hero-not-template`, `craft-contrast-text-on-media` (read them with get_guidelines or rules/*.md).
+Rules to satisfy: `ux-purpose-clear`, `ux-primary-cta-above-fold`, `ux-false-floor`, `distinct-hero-not-template`, `distinct-no-decorative-glow`, `distinct-no-accent-word-headline`, `distinct-eyebrow-restraint`, `craft-contrast-text-on-media` (read them with get_guidelines or rules/*.md).
+- [ ] Option gate (protocol 4): every concept on the sheet passed review_design with zero blockers and none of `distinct-hero-not-template`, `distinct-no-decorative-glow`, `distinct-no-accent-word-headline`, `distinct-eyebrow-restraint`, and a fresh critic scored each from screenshots only.
 - [ ] The first screen answers what it is and what to do within five seconds.
 - [ ] Mobile and desktop screenshots exist, and the two side-by-side sheets were sent to the owner.
 - [ ] Each concept went through two critique rounds beside its reference (or a scored reference rebuild), with the gap lists in notes.md.

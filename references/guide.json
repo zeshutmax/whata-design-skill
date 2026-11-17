@@ -1,5 +1,5 @@
 {
-  "builtAt": "2026-11-17T16:12:09.368Z",
+  "builtAt": "2026-11-17T20:17:21.277Z",
   "process": {
     "version": 2,
     "notes": "The spine of the Learn library. Stages and steps are data; lessons, templates and style guides attach to steps by slug. `inputs` and `outputs` are named artifacts: every input must be produced by an earlier step in the full track. `uses` lists library or MCP tools relevant to the step. `sources` are ids in content/learn/sources.json. `loops` record where the process is expected to go back. `tracks` are shorter paths through the same steps; a track may skip steps, in which case their artifacts are marked not applicable. A track may also list `replaces`: for each step it runs, an input the track skips is named with the artifact that carries it in this track (`by`, one artifact or a list, produced by an earlier step of the track or by the step itself) or with `by: null` when the input is dropped, and `how` says what to write instead. validate-process.mjs checks that every input of a track step is produced in the track or listed in `replaces`.",
@@ -1724,6 +1724,7 @@
       "procedure": [
         "Call list_library_sections. Match sections to the brief's jobs: a hero that carries the primary action, then the sections that answer the visitor's top questions, then a close that captures (the Success section of the brief).",
         "Propose 2 to 4 sections, plus one alternative for the hero. For each: why it fits this brief, which slots change and with what (words, pictures, the client's product UI, the canvas within the spec's range, one niche accent), and which of its bans matter here.",
+        "The option gate (protocol 4) applies here too: the sheet of library sources and rebuilds comes from list_library_sections, but any adapted section or mock-up you show as an option passes review_design with zero blockers and none of `distinct-hero-not-template`, `distinct-no-decorative-glow`, `distinct-no-accent-word-headline`, `distinct-eyebrow-restraint`, is scored by one fresh critic from screenshots only (get_critic_brief), and the owner's 1 to 10 score per option is recorded with record_taste (type score).",
         "Show the owner one sheet: per section a row with the source (get_library_section's sourceFold, or the live sourceUrl for a lower section) and the rebuild, labelled with the section id. An owner who is not at your keyboard needs the sheet as image files, not links.",
         "Write the media plan: for every picture slot, the real photo, video or product UI it will hold and where it comes from. No code-drawn stand-ins for photographs.",
         "Write the design system before any section is adapted (content/sections/TOKENS.md): every --ds-* token, one ground, one ink, two greys, one accent, two families plus mono, one h2 size, one h3 style, two buttons, two radii, one container and gutter, one section rhythm. Sections keep their source geometry and motion; their paint and type come from these tokens through content/sections/roles.css (class ds on the page root). Skipping this ships a page where every section brings its source's fonts and colours (a client pilot, 2026-11-16: 41 type styles, 13 text colours, 8 radii, 8 button styles).",
@@ -1743,7 +1744,11 @@
         },
         {
           "tool": "record_taste",
-          "use": "record the owner's pick (type pick, gate sections) and words"
+          "use": "record the owner's 1 to 10 score per option (type score) and their pick (type pick, gate sections) with their words"
+        },
+        {
+          "tool": "review_design",
+          "use": "any adapted section or mock-up shown as an option: zero blockers and none of the option-gate minors (protocol 4)"
         }
       ],
       "output": {
@@ -1814,6 +1819,7 @@
       "slug": "explore-directions",
       "role": "Converge the sketches into three genuinely different directions the owner could choose between.",
       "procedure": [
+        "The option gate (protocol 4) comes before the owner sees anything: draft the three with propose_directions and show them only as render_sheet sheets; each concept passes review_design with zero blockers and none of `distinct-hero-not-template`, `distinct-no-decorative-glow`, `distinct-no-accent-word-headline`, `distinct-eyebrow-restraint`; one fresh critic scores each from its screenshots only (get_critic_brief), recorded as a model's scores beside the sheet; and the owner's 1 to 10 score for every option is recorded with record_taste (type score, round `gate 2: <direction>`). Hand-made mock-ups never go to the owner, whata.design's own pages included. [Our take]",
         "Show the directions to an owner who is not at your keyboard as one side-by-side sheet per size (desktop and mobile, the three concepts in a row, each labelled with its name and one-line north star) saved as image files, plus the north-star lines in your message. That worked better than links or prose.",
         "Cluster the sketches and pick three directions that differ in at least two of: art-style family, mood, type class (serif, grotesque, mono, display), palette mood, page skeleton.",
         "Concept first (studio method, get_studio concepts): write three concepts from different territories (the subject's name or story, its material, its place or culture, a metaphor for how it works, a formal or typographic system). Each has one sentence, its anchor (the specific fact about this subject it depends on), the signature moment, the emotion of the first 3 seconds, the motion verb and the frame people would screenshot; score originality, fit, feasibility and portability (could it move to another brand? lower is better). Each direction below is one concept dressed in an art direction from the library; a library style alone is not a direction. [Our take, from the awwwards method]",
@@ -1859,6 +1865,18 @@
           "use": "the three hero concept files; writes one labelled side-by-side sheet per size (1440x900 and 390x844) to show the owner"
         },
         {
+          "tool": "review_design",
+          "use": "each concept before the sheet goes out: zero blockers and none of the option-gate minors (protocol 4)"
+        },
+        {
+          "tool": "get_critic_brief",
+          "use": "the brief for one fresh critic who scores each option from screenshots only, before the owner sees the sheet"
+        },
+        {
+          "tool": "record_taste",
+          "use": "type score per option (round `gate 2: <direction>`, score 1 to 10, the owner's words, slugs shown), then type pick for the choice"
+        },
+        {
           "tool": "get_recipe",
           "use": "at most 3 tags per call (canonical slugs from list_tags); returns keep, avoid, steps; long JSON with many tags"
         },
@@ -1884,6 +1902,7 @@
           "Each direction carries a concept with an anchor fact and a portability score, a signature moment and a motion verb; no direction is a library style alone.",
           "Each direction names a niche cue: avoiding the niche's clichés must not drop its vocabulary (a wedding site still needs something that says wedding).",
           "The directions differ in at least two dimensions and span safe, stretch and wildcard, each anchored on named library sites with a stated take.",
+          "Option gate (protocol 4): the options came from propose_directions and render_sheet; each passed review_design with zero blockers and none of `distinct-hero-not-template`, `distinct-no-decorative-glow`, `distinct-no-accent-word-headline`, `distinct-eyebrow-restraint`; a fresh critic scored each from screenshots only; the owner's 1 to 10 score per option is recorded with record_taste.",
           "The owner was shown the desktop and mobile sheets (made in explore-hero) and their pick is recorded, or the pick is the one blocking question in OPEN-QUESTIONS.md and work has stopped (protocol 4).",
           "Each names its recipe and collision risks.",
           "Each names a lead element and a second moment lower on the page; at least one direction departs from the niche default.",
@@ -1896,6 +1915,7 @@
       ],
       "pitfalls": [
         "Three variations of one idea.",
+        "Showing the owner hand-made mock-ups that skipped propose_directions, render_sheet, review_design and the critic: a centred stack with a stats strip, a soft glow, one accent-coloured italic word and corner labels is what read as AI-made on 2026-11-17.",
         "Choosing for the owner and marking it ASSUMED: taste is never defaulted.",
         "Three palettes on one layout (not three directions).",
         "Ignoring the accessibility risks of a favorite style.",
@@ -2075,6 +2095,7 @@
         "Keep the heroes small; do not build the whole page yet.",
         "Show each concept beside its library anchors: the concept's key frame and the fold screenshots of the two or three library sites it takes its visual language from, on one sheet (`imageSheet` in @whata/audit, or put the anchor folds from storage/sites/ next to the concept in `cli sheet`). Name what each anchor gives (canvas, type, the object, the motion). If the frame does not visibly belong next to them, it is not in the library's language yet: change the canvas, type, spacing or object, not the concept. [Our take]",
         "Every frame a poster: the first frame of each concept is its best, with type, space and image composed on purpose; motion may only amplify it. Rough the signature moment in at least the concept you recommend (a still of its key frame is enough for the sheet), so the owner judges the idea, not a layout. [Our take, from the awwwards method]",
+        "Before the sheet, the option gate (protocol 4): each concept passes review_design with zero blockers and none of `distinct-hero-not-template`, `distinct-no-decorative-glow`, `distinct-no-accent-word-headline`, `distinct-eyebrow-restraint`, and one fresh critic scores each from its screenshots only (get_critic_brief). Fix and re-run a concept that fails; do not send it with a note.",
         "Make the sheets and stop: render_sheet (or the audit CLI's `sheet` command) puts the three concepts side by side, labelled with name and north star, one image per size (1440x900 and 390x844), with review_design run on each concept first. Send both sheets to the owner and ask gate 2's question (explore-directions). Nothing from decide-tokens onward starts, and nothing is built in the site tree, until the owner's pick is recorded. Screenshots of a single concept: `pnpm --silent --filter @whata/audit cli shot <file|url> <out.png> <width> <height>`.",
         "No photographs of a physical product? Follow the imagery plan in the direction matrix: build the live object (price, seats, dates, a calculator or booking control made of real HTML with real states and real numbers), or set a measurement, date or price large as real text, or leave the image out and mark the gap. Do not draw the product from shapes in code. A faint decorative gradient or texture that does not depict the product is ornament; one that starts to depict it (grooves that read as a wheel, a glaze) is an illustration and counts under `distinct-real-imagery-and-icons`. [Our take]"
       ],
@@ -2107,6 +2128,10 @@
         {
           "tool": "compare_to_library",
           "use": "each concept with its anchor slugs: gaps in scale contrast, whitespace, lead object and motion before the owner sees it"
+        },
+        {
+          "tool": "get_critic_brief",
+          "use": "one fresh critic scores each concept from its screenshots only before the sheet goes out"
         }
       ],
       "output": {
@@ -2119,9 +2144,13 @@
           "ux-primary-cta-above-fold",
           "ux-false-floor",
           "distinct-hero-not-template",
+          "distinct-no-decorative-glow",
+          "distinct-no-accent-word-headline",
+          "distinct-eyebrow-restraint",
           "craft-contrast-text-on-media"
         ],
         "checks": [
+          "Option gate (protocol 4): every concept on the sheet passed review_design with zero blockers and none of `distinct-hero-not-template`, `distinct-no-decorative-glow`, `distinct-no-accent-word-headline`, `distinct-eyebrow-restraint`, and a fresh critic scored each from screenshots only.",
           "The first screen answers what it is and what to do within five seconds.",
           "Mobile and desktop screenshots exist, and the two side-by-side sheets were sent to the owner.",
           "Each concept went through two critique rounds beside its reference (or a scored reference rebuild), with the gap lists in notes.md.",
@@ -2370,6 +2399,7 @@
       "procedure": [
         "An early pick: when the owner already picked one bundle or sketch at gate 1, record it here (`Owner pick:`, gate 1) at that moment and say so; gate 2 then confirms it with the built concepts instead of asking again from scratch.",
         "Start from the owner's pick. The owner chose from the directions sheet (gate 2, explore-directions); record their words as `Owner pick: ...` at the top of the decision, with any mix they asked for, and record it with record_taste (type pick, gate 2, the project folder, the anchor slugs of the picked concept, their words). No pick recorded means this step is not done: do not decide for them (protocol 4).",
+        "Record the owner's scores too: a 1 to 10 score for every option on the sheet, one record_taste call each (type score, round `gate 2: <option>`, score, their words, slugs shown), so a rejected option's score is kept as well as the pick. If the owner gave only a pick, ask for the scores in the same message as the next question; do not infer them. The critic's scores from the option gate (protocol 4) sit beside them, labelled a model's.",
         "Apply the decision rule from the success criteria to the critique, inclusion check and test results, and write your own scoring as advice under the heading `The model's ranking, for what it is worth`. If your ranking disagrees with the owner's pick, say so in one line and follow the pick.",
         "Write the decision log: chosen direction, scores, reasons, rejected directions and why, what to carry over from rejected ones, and open risks.",
         "Name the crux surfaces: the one or two parts of the page it stands or falls on (for example the hero and the booking path). They get the longest polish in realize-sweep. Choose them from the need and the brief, not from what is easiest to make beautiful.",
@@ -2386,10 +2416,15 @@
       "ask_user": [
         "Which direction do you pick from the sheet? (a) [n], my recommendation (recommended) (b) another number or a mix: say which."
       ],
-      "tools": [],
+      "tools": [
+        {
+          "tool": "record_taste",
+          "use": "type score per option (1 to 10, round naming the gate and option) and type pick for the choice, with the owner's words"
+        }
+      ],
       "output": {
         "path": "design/05-decide/direction-decision.md",
-        "template": "# Direction decision (date, decider: the owner)\n- Owner pick: [the owner's words]\n- Chosen:\n- Why (against the criteria):\n- Crux surfaces (polished longest):\n- Rejected and why:\n- Carry over from rejected directions:\n- Open risks and how they will be watched:\n## The model's ranking, for what it is worth (advice, not the decision)"
+        "template": "# Direction decision (date, decider: the owner)\n- Owner pick: [the owner's words]\n- Owner's scores (1 to 10 per option, recorded with record_taste): A [n], B [n], C [n]\n- Fresh critic's scores (screenshots only, a model's): A [n], B [n], C [n]\n- Chosen:\n- Why (against the criteria):\n- Crux surfaces (polished longest):\n- Rejected and why:\n- Carry over from rejected directions:\n- Open risks and how they will be watched:\n## The model's ranking, for what it is worth (advice, not the decision)"
       },
       "gates": {
         "rules": [
@@ -2397,6 +2432,7 @@
         ],
         "checks": [
           "`Owner pick:` is recorded in the owner's words; without it the step is not done.",
+          "The owner's 1 to 10 score for every option is recorded with record_taste; the options shown had passed the option gate (protocol 4: propose_directions and render_sheet, review_design with no blocker and no option-gate minor, one fresh critic from screenshots).",
           "The decision cites the criteria, not preference alone.",
           "The model's scoring is labelled as advice."
         ]
@@ -8479,13 +8515,42 @@
       "group": "distinct"
     },
     {
-      "id": "distinct-no-decorative-glow",
-      "topic": "Surface",
-      "statement": "No element has a chromatic box-shadow or text-shadow with zero offset and blur of 3 px or more, and no chromatic radial-gradient halo sits behind the hero or sections on a dark page, unless it encodes a state.",
-      "why": "Five independent source groups call glows and halos a default AI look. Impeccable's detector uses a minimum glow strength of 3 px and, for radial halos, a minimum effective alpha of 0.14 and contrast of 1.30 on the surface. One lineage's numbers; treat as indicative.",
+      "id": "distinct-no-accent-word-headline",
+      "topic": "Typography",
+      "statement": "No h1 or h2 sets one word or a short run (up to three words and under half of the heading's characters, not a link or code) apart from the rest of the heading by italic, a different colour, a different font family or a weight 200 or more units away (for example \"Taste your AI can <em>read.</em>\" with the accent colour on \"read.\"). One such heading per page is allowed only as a recorded exception with a subject reason.",
+      "why": "The single italic or accent-coloured word in a serif display headline is a stock move of generated hero sections: the owner named it on 2026-11-17 as one of the tells that made our own mock-ups read as AI-made, and the local design-taste skill bans the line-broken italic headline as a default move and mixed-family emphasis. Emphasis that the sentence needs can come from wording and order; the three-word and half-heading limits are our own thresholds.",
       "check": {
         "type": "automated",
-        "how": "Parse computed box-shadow and text-shadow lists: flag entries with 0 horizontal and vertical offset, blur at or above 3 px and a saturated colour. Flag background-image radial-gradient with a saturated centre fading to transparent over a dark surface.",
+        "how": "For every visible h1 and h2 with two or more words, compare each descendant element (skipping links, code, sup, sub, images and runs of 1 px or less) whose text is three words or fewer and under half the heading's characters with the heading's computed style: font-style italic or oblique versus normal, colour (summed RGB channel difference over 48, a hue shift over 30 degrees between chromatic colours, or chromatic versus neutral), primary font family, and font-weight 200 or more apart. Report one finding per heading; any finding fails unless it is recorded as an exception.",
+        "tools": [
+          "headless browser",
+          "getComputedStyle"
+        ]
+      },
+      "severity": "minor",
+      "label": "our-take",
+      "sources": [
+        "local-design-taste-frontend"
+      ],
+      "tension": [
+        "serif-editorial",
+        "expressive-type",
+        "editorial"
+      ],
+      "generate_hint": "Write a headline that carries its own emphasis; if one word must stand out, change the sentence, not the word's colour or slant.",
+      "applies_to": [
+        "homepage"
+      ],
+      "group": "distinct"
+    },
+    {
+      "id": "distinct-no-decorative-glow",
+      "topic": "Surface",
+      "statement": "No element has a chromatic box-shadow or text-shadow with zero offset and blur of 3 px or more; no chromatic radial-gradient halo (a saturated stop fading to transparent, on an element or its ::before/::after) sits behind the hero or a section, on a dark page at any size or on a light page at 160 x 160 px or larger; and no blurred colour blob (a textless element of 120 px or more with a chromatic fill and filter: blur of 20 px or more) is used, unless the glow or halo encodes a state (focus, selection, live status).",
+      "why": "Five independent source groups call glows and halos a default AI look. Impeccable's detector uses a minimum glow strength of 3 px and, for radial halos, a minimum effective alpha of 0.14 and contrast of 1.30 on the surface. One lineage's numbers; treat as indicative. The light-page halo (a soft peach or pink radial glow behind a centred hero) was added on 2026-11-17 after the owner named it as one of the tells that made our own hero mock-ups read as AI-made; the 160 px floor is our own threshold so a small button sheen does not count.",
+      "check": {
+        "type": "automated",
+        "how": "Parse computed box-shadow and text-shadow lists: flag entries with 0 horizontal and vertical offset, blur at or above 3 px and a saturated colour. Flag background-image radial-gradient (on the element or its ::before/::after) with a saturated stop and a stop under 0.3 alpha: on a dark page at any size, on a light page when the box is 160 px or more both ways. Flag textless elements of 120 px or more with a chromatic background and filter blur of 20 px or more. A halo that encodes a state is recorded as an exception.",
         "tools": [
           "headless browser",
           "impeccable detect (dark-glow, radial-halo, radial-spotlight-glow)"
@@ -8545,11 +8610,11 @@
     {
       "id": "distinct-eyebrow-restraint",
       "topic": "Template chrome",
-      "statement": "Small uppercase or small-caps tracked labels placed directly above headings number at most ceil(sections / 3) on the page, none sits above the hero headline unless recorded as an exception, and numbered markers (01, 02, 03) appear only where the content is a real sequence.",
-      "why": "Impeccable bans a kicker above a heading outright and flags the hero chip; Anthropic's skill and Capital & Compute list tracked all-caps eyebrows and numbered markers; Noqta flags excess tracking on uppercase eyebrows; the local skill sets 'at most one per three sections'. The strict source and the lenient source disagree; this rule checks the lenient threshold.",
+      "statement": "Small labels used as ornament stay rare: tracked uppercase or small-caps labels directly above headings plus small (14 px or less) uppercase, small-caps or monospace labels anywhere in the first viewport that are not links, buttons, navigation, form, table or code text (corner labels such as \"SHEET 01\" or \"MEASURED ON RENDER\") number at most ceil(sections / 3) on the page and at most one in the first viewport; none sits above the hero headline unless recorded as an exception; and numbered markers (01, 02, 03) appear only where the content is a real sequence.",
+      "why": "Impeccable bans a kicker above a heading outright and flags the hero chip; Anthropic's skill and Capital & Compute list tracked all-caps eyebrows and numbered markers; Noqta flags excess tracking on uppercase eyebrows; the local skill sets 'at most one per three sections'. The strict source and the lenient source disagree; this rule checks the lenient threshold. Corner and caption labels in the first viewport were added on 2026-11-17: the owner named decorative all-caps mono labels as a tell in our own mock-ups, and the local skill bans the mono-caps decoration strip at the hero bottom. The one-per-first-viewport limit is our own threshold.",
       "check": {
         "type": "automated",
-        "how": "Find elements with text-transform uppercase (or small-caps), positive letter-spacing and length of 40 characters or fewer that are the previous sibling of a heading. Count them and compare with ceil(section count / 3). Separately flag numeric prefixes in these labels where the section list is not an ordered process.",
+        "how": "Find elements with text-transform uppercase (or small-caps), positive letter-spacing and length of 40 characters or fewer that are the previous sibling of a heading (eyebrows). Separately, in the first viewport, find elements whose own text is 2 to 40 characters at 14 px or less, set uppercase, small-caps, literal capitals (two or more words, or six or more letters) or a monospace family, outside a, button, nav, label, form fields, footer, code, pre, table and headings (ornament labels). Fail if eyebrows plus ornament labels exceed ceil(section count / 3), if eyebrows in the first viewport plus ornament labels exceed 1, or if an eyebrow sits above the h1. Flag numeric prefixes in eyebrows where the section list is not an ordered process.",
         "tools": [
           "headless browser",
           "impeccable detect (kicker-above-heading, hero-eyebrow-chip, numbered-section-labels)"
@@ -8570,7 +8635,7 @@
         "utilitarian",
         "newspaper"
       ],
-      "generate_hint": "Let each heading stand alone and drop the label above it unless it adds information.",
+      "generate_hint": "Let each heading stand alone, and drop corner labels, sheet numbers and mono captions that only decorate; keep a label only when it tells the reader something.",
       "applies_to": [
         "homepage"
       ],
@@ -8708,11 +8773,11 @@
     {
       "id": "distinct-hero-not-template",
       "topic": "Layout",
-      "statement": "The first viewport shows a real, subject-specific element (the product UI, work, place or object) and does not match the stock skeleton: at most two of these five signals appear together (centred headline, badge or eyebrow above it, exactly two buttons, a logo row within the next section, a three-card feature row as the following section).",
-      "why": "Five independent groups describe the same skeleton; Capital & Compute lists it as 'stock page order'. A centred hero alone is common and conventional, so this rule scores the whole skeleton plus whether real subject content leads.",
+      "statement": "The first viewport shows a real, subject-specific element (the product UI, work, place or object) and does not match the stock skeleton: at most two of these six signals appear together (centred headline, badge or eyebrow above it, exactly two buttons, a logo row within the next section, a three-card feature row as the following section, a stats strip of three or more big numbers in one row below the headline or as the following section).",
+      "why": "Five independent groups describe the same skeleton; Capital & Compute lists it as 'stock page order'. A centred hero alone is common and conventional, so this rule scores the whole skeleton plus whether real subject content leads. The stats strip was added as the sixth signal on 2026-11-17: the owner named the centred stack of eyebrow, headline, sub, pill button and stats row as the shape of our own AI-looking mock-ups.",
       "check": {
         "type": "hybrid",
-        "how": "At 1440 px, score the five signals from the DOM and computed styles. A reviewer confirms the hero's dominant visual is real subject content (not a gradient blob or a div mock-up).",
+        "how": "At 1440 px, score the six signals from the DOM and computed styles. A big number is an element whose own text is a number of 10 characters or fewer (with an optional unit, %, x, + or currency) at max(28 px, 1.6 x body size); three or more with tops within 16 px and different left edges, below the h1 in the hero's section or anywhere in the next section, form a stats strip. Fail at three or more signals. A reviewer confirms the hero's dominant visual is real subject content (not a gradient blob or a div mock-up).",
         "tools": [
           "headless browser",
           "screenshots"
@@ -9922,6 +9987,7 @@
       "distinct-no-ai-palette",
       "distinct-palette-not-reflex-cream",
       "distinct-no-gradient-text",
+      "distinct-no-accent-word-headline",
       "distinct-no-decorative-glow",
       "distinct-glass-with-purpose",
       "distinct-eyebrow-restraint",
@@ -17277,6 +17343,141 @@
         }
       ],
       "generate_hint": "No backend? Use a native form with required as the no-JS fallback, a mailto: action and JS that validates then opens a prefilled email, plus a phone link; say that nothing is sent until the user presses send and that email is not private; add a five-part privacy line and 'do not write bank details here'; show errors and success in live regions without moving focus onto them; set type=tel, inputmode and autocomplete."
+    },
+    {
+      "slug": "real-data-as-the-picture",
+      "title": "Real data as the picture: the product's own true numbers as the hero or section visual",
+      "tags": [
+        "analytics-data",
+        "technical-diagram",
+        "specimen",
+        "product-screenshots"
+      ],
+      "summary": "When the product's strongest image is something it measured or specifies, make that the visual: a measured index (every item placed by its real score), a ruler of real values (a type scale, spacing steps, prices, distances), or a spec set beside the screenshot it describes. The numbers are true, sourced and dated, set as real text in HTML or SVG, and the picture still works for people who cannot see it, at 320 px, at 200% text and without motion. It replaces the gradient glow and the row of three big numbers, it does not decorate them.",
+      "keep": "One composed picture made of the product's own data: a measured index, a ruler of real values, or a spec beside its screenshot, in the page's own type and tokens.",
+      "avoid": "Invented or rounded-up numbers; a row of three big numbers under the hero (the stats strip); data drawn as a raster image or as decoration with no labels; colour as the only key; count-up animations that hide the final value; a chart with no text alternative or source.",
+      "generate_hint": "Use the product's own measured or specified numbers as the visual (an index, a ruler, a spec beside its screenshot), set as real text with a source and date, a text alternative and a table behind it; never a stats strip or a decorative chart.",
+      "steps": [
+        {
+          "id": "rd-true-numbers-only",
+          "title": "Only true, sourced numbers",
+          "do": "Draw the picture only from numbers the product really has: a measurement you ran, a value in a source file, a published spec. Record where each comes from and when (a data-source attribute, a visible note under the picture, and the source in design/assets.md). Numbers you do not have are left out, never estimated or rounded up to look better.",
+          "satisfies": [
+            "distinct-no-filler-copy",
+            "distinct-real-imagery-and-icons"
+          ],
+          "how": "distinct-no-filler-copy fails round statistics with no data-source; the honesty rules in the protocol (3.2) forbid invented numbers and mark unconfirmed facts with the .assumed marker. Read the values from the file or tool that produced them at build time (a JSON the site already reads, a measurement script) so the picture cannot drift from the truth.",
+          "label": "our-take",
+          "technique_sources": [],
+          "status": "judgement",
+          "status_note": "Written 2026-11-17 from the owner's review of hero mock-ups (the tells were a centred stack with a stats strip, a glow, an accent word and decorative labels); not yet built as a demo or audited, so the markup is general engineering knowledge."
+        },
+        {
+          "id": "rd-one-picture-not-strip",
+          "title": "One composed picture, not a strip",
+          "do": "Compose the data as one picture with its own structure (items placed on a scale, ticks on a ruler, callouts beside a screenshot), large enough to be the lead object of the first screen or the section. Do not set three or four big numbers in a row under the headline: that is the stats strip of distinct-hero-not-template.",
+          "satisfies": [
+            "distinct-hero-not-template",
+            "distinct-no-decorative-glow"
+          ],
+          "how": "The audit counts a row of three or more numbers at 28 px or 1.6 times body size or larger, below the h1 or in the next section, as a stock hero signal. A measured index or ruler reads as the product's own work; give it the space a product photo would take and no glow behind it.",
+          "label": "our-take",
+          "technique_sources": [],
+          "status": "judgement",
+          "status_note": "Written 2026-11-17 from the owner's review of hero mock-ups (the tells were a centred stack with a stats strip, a glow, an accent word and decorative labels); not yet built as a demo or audited, so the markup is general engineering knowledge."
+        },
+        {
+          "id": "rd-real-text",
+          "title": "Labels and values as text",
+          "do": "Set every label and value as real text: HTML, or SVG text elements in the page's fonts, never a raster image of the chart. Tick labels, values and units scale with the user's text size.",
+          "satisfies": [
+            "a11y-images-of-text",
+            "a11y-resize-text"
+          ],
+          "how": "WCAG 1.4.5 asks for text rather than images of text where the presentation can be achieved with text; text in HTML or in SVG text elements can be resized, translated and selected. Size SVG text in CSS units relative to the root size so it follows a 200% text setting, and check it with the audit's stress pass.",
+          "label": "standard",
+          "technique_sources": [
+            "wcag-understanding-images-of-text",
+            "wcag-understanding-resize-text"
+          ],
+          "status": "partly-verified",
+          "status_note": "The requirement was read in the WCAG Understanding pages listed. Written 2026-11-17 from the owner's review of hero mock-ups (the tells were a centred stack with a stats strip, a glow, an accent word and decorative labels); not yet built as a demo or audited, so the markup is general engineering knowledge."
+        },
+        {
+          "id": "rd-text-alternative",
+          "title": "Name the takeaway, keep the table",
+          "do": "Give the picture a text alternative that states its takeaway in one sentence (role=\"img\" with aria-labelledby on an SVG, or a figure with a figcaption), and make the underlying values available as a real table or list: visible below, or in a details element. Purely decorative ticks and gridlines are aria-hidden.",
+          "satisfies": [
+            "a11y-alt-text",
+            "comp-data-table-semantics",
+            "copy-alt-text-writing"
+          ],
+          "how": "WCAG 1.1.1 asks that non-text content has a text alternative that serves the same purpose; for a chart the purpose is the finding, and the data itself belongs in a table with th and scope (see comp-data-table-semantics). Write the takeaway, not a description of the shapes (\"40 sites by measured contrast, from 2.1:1 to 17:1\").",
+          "label": "standard",
+          "technique_sources": [
+            "wcag-understanding-non-text-content",
+            "nng-write-alt-text",
+            "ic-data-tables"
+          ],
+          "status": "partly-verified",
+          "status_note": "The requirement was read in the sources listed; the markup was not tested with a screen reader here. Written 2026-11-17 from the owner's review of hero mock-ups (the tells were a centred stack with a stats strip, a glow, an accent word and decorative labels); not yet built as a demo or audited, so the markup is general engineering knowledge.",
+          "code": {
+            "lang": "html",
+            "text": "<figure>\n  <svg role=\"img\" aria-labelledby=\"idx-title\" viewBox=\"0 0 1200 320\">\n    <title id=\"idx-title\">40 library sites placed by measured headline-to-body contrast, from 2.1 to 9.4</title>\n    <!-- one mark per real item; tick labels as <text> -->\n  </svg>\n  <figcaption>Measured on 2026-11-17 from the captured pages. <a href=\"#idx-table\">The values as a table</a></figcaption>\n</figure>\n<details><summary>All 40 values</summary><table id=\"idx-table\">...</table></details>"
+          }
+        },
+        {
+          "id": "rd-not-colour-alone",
+          "title": "Shape and label carry meaning",
+          "do": "When marks fall into groups or one item is highlighted, tell them apart by label, shape or position as well as colour; marks that must be seen to read the picture reach 3:1 against their background and all text 4.5:1 (3:1 at large size).",
+          "satisfies": [
+            "a11y-color-not-only",
+            "a11y-non-text-contrast",
+            "a11y-contrast-text"
+          ],
+          "how": "WCAG 1.4.1 forbids colour as the only visual means of conveying information, and 1.4.11 asks 3:1 for graphical objects required to understand the content. Check each mark and text colour against the background with check_contrast (role ui for marks, text for labels).",
+          "label": "standard",
+          "technique_sources": [
+            "wcag-understanding-use-of-color",
+            "wcag-contrast-minimum"
+          ],
+          "status": "partly-verified",
+          "status_note": "The requirements were read in the sources listed. Written 2026-11-17 from the owner's review of hero mock-ups (the tells were a centred stack with a stats strip, a glow, an accent word and decorative labels); not yet built as a demo or audited, so the markup is general engineering knowledge."
+        },
+        {
+          "id": "rd-reflow-320",
+          "title": "Reflow or scroll its region",
+          "do": "At 320 px the picture either reflows (a horizontal ruler becomes vertical, an index becomes a ranked list) or scrolls inside its own labelled region; the page itself never scrolls sideways.",
+          "satisfies": [
+            "a11y-reflow",
+            "comp-data-table-overflow-focusable"
+          ],
+          "how": "WCAG 1.4.10 exempts content that needs two-dimensional layout for meaning, such as data tables and some charts, but the rest of the page must still reflow. A scrolling region needs tabindex=\"0\", a role and an accessible name so keyboard users can scroll it. Check with the audit CLI's widths command at 320, 390 and 320 at 200% text.",
+          "label": "standard",
+          "technique_sources": [
+            "wcag-understanding-reflow"
+          ],
+          "status": "partly-verified",
+          "status_note": "The requirement was read in the source listed. Written 2026-11-17 from the owner's review of hero mock-ups (the tells were a centred stack with a stats strip, a glow, an accent word and decorative labels); not yet built as a demo or audited, so the markup is general engineering knowledge."
+        },
+        {
+          "id": "rd-final-values-first",
+          "title": "Final values without motion",
+          "do": "The final values are in the HTML and visible without JavaScript and with reduced motion. If marks draw in or numbers count up, that runs once, briefly, only without prefers-reduced-motion, and never starts from zero in the markup.",
+          "satisfies": [
+            "a11y-reduced-motion",
+            "perf-core-first",
+            "distinct-motion-authored"
+          ],
+          "how": "A count-up that starts from 0 in the HTML shows false numbers to crawlers, screen readers and anyone whose script fails. Render the true values server-side and animate from them only as an enhancement inside @media (prefers-reduced-motion: no-preference).",
+          "label": "our-take",
+          "technique_sources": [
+            "wcag-understanding-animation-from-interactions"
+          ],
+          "status": "judgement",
+          "status_note": "Written 2026-11-17 from the owner's review of hero mock-ups (the tells were a centred stack with a stats strip, a glow, an accent word and decorative labels); not yet built as a demo or audited, so the markup is general engineering knowledge."
+        }
+      ]
     }
   ],
   "principles": [

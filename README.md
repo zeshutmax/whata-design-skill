@@ -5,7 +5,7 @@ a Quality Bar of testable rules, recipes that keep bold styles accessible, and n
 
 - What it is and how it works: https://whata.design/skill/
 - The library it is built on: https://whata.design/library/
-- Version: 2026-11-17 (96e1ad0)
+- Version: 2026-11-17 (7e919fa)
 
 ## Install
 

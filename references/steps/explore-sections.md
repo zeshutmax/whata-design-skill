@@ -6,16 +6,18 @@
 ## Procedure
 1. Call list_library_sections. Match sections to the brief's jobs: a hero that carries the primary action, then the sections that answer the visitor's top questions, then a close that captures (the Success section of the brief).
 2. Propose 2 to 4 sections, plus one alternative for the hero. For each: why it fits this brief, which slots change and with what (words, pictures, the client's product UI, the canvas within the spec's range, one niche accent), and which of its bans matter here.
-3. Show the owner one sheet: per section a row with the source (get_library_section's sourceFold, or the live sourceUrl for a lower section) and the rebuild, labelled with the section id. An owner who is not at your keyboard needs the sheet as image files, not links.
-4. Write the media plan: for every picture slot, the real photo, video or product UI it will hold and where it comes from. No code-drawn stand-ins for photographs.
-5. Write the design system before any section is adapted (content/sections/TOKENS.md): every --ds-* token, one ground, one ink, two greys, one accent, two families plus mono, one h2 size, one h3 style, two buttons, two radii, one container and gutter, one section rhythm. Sections keep their source geometry and motion; their paint and type come from these tokens through content/sections/roles.css (class ds on the page root). Skipping this ships a page where every section brings its source's fonts and colours (a client pilot, 2026-11-16: 41 type styles, 13 text colours, 8 radii, 8 button styles).
-6. No section fits a need the brief has: pin a new one from a library site first (content/sections/HOW-TO-ADD.md), or ask the owner for a site to take it from. Do not design that part from scratch.
+3. The option gate (protocol 4) applies here too: the sheet of library sources and rebuilds comes from list_library_sections, but any adapted section or mock-up you show as an option passes review_design with zero blockers and none of `distinct-hero-not-template`, `distinct-no-decorative-glow`, `distinct-no-accent-word-headline`, `distinct-eyebrow-restraint`, is scored by one fresh critic from screenshots only (get_critic_brief), and the owner's 1 to 10 score per option is recorded with record_taste (type score).
+4. Show the owner one sheet: per section a row with the source (get_library_section's sourceFold, or the live sourceUrl for a lower section) and the rebuild, labelled with the section id. An owner who is not at your keyboard needs the sheet as image files, not links.
+5. Write the media plan: for every picture slot, the real photo, video or product UI it will hold and where it comes from. No code-drawn stand-ins for photographs.
+6. Write the design system before any section is adapted (content/sections/TOKENS.md): every --ds-* token, one ground, one ink, two greys, one accent, two families plus mono, one h2 size, one h3 style, two buttons, two radii, one container and gutter, one section rhythm. Sections keep their source geometry and motion; their paint and type come from these tokens through content/sections/roles.css (class ds on the page root). Skipping this ships a page where every section brings its source's fonts and colours (a client pilot, 2026-11-16: 41 type styles, 13 text colours, 8 radii, 8 button styles).
+7. No section fits a need the brief has: pin a new one from a library site first (content/sections/HOW-TO-ADD.md), or ask the owner for a site to take it from. Do not design that part from scratch.
 ## Ask the owner (only what you cannot default)
 - Which sections should the page be built from? (a) recommended: the proposed set in the order shown (b) the proposed set with the alternative hero (c) other sections or another library site; name them
 ## Tools
 - `list_library_sections`: the sections, their sources and adaptation slots
 - `get_library_section`: spec, markup and source screenshot for each candidate
-- `record_taste`: record the owner's pick (type pick, gate sections) and words
+- `record_taste`: record the owner's 1 to 10 score per option (type score) and their pick (type pick, gate sections) with their words
+- `review_design`: any adapted section or mock-up shown as an option: zero blockers and none of the option-gate minors (protocol 4)
 ## Output template
 ```markdown
 # Section pick
