@@ -1,0 +1,31 @@
+# Recipes
+- `dark-neon-contrast`: Dark, neon and atmospheric palettes that stay readable. Styles: dark-cyber, neon, gradient-aurora, grain-noise, monochrome
+- `glass-pastel-soft`: Glass, pastel and soft palettes without washed-out text. Styles: glassmorphism, pastel
+- `minimal-clear`: Minimal and quiet-luxury pages that remain clear and usable. Styles: minimal, quiet-luxury, hero-type-only, poster
+- `webgl-and-3d`: 3D, WebGL, cursor effects and interactive art. Styles: realtime-3d, hero-3d, interactive-art, cursor-effects
+- `video-and-ambient-motion`: Hero video, ambient loops and marquees. Styles: hero-video, ambient-loop, marquee
+- `scroll-stories`: Scroll-driven stories, parallax and text effects. Styles: chaptered-story, scroll-triggered, parallax, long-scroll-narrative, text-effects
+- `intro-and-preloaders`: Intro animations and preloaders. Styles: intro-preloader
+- `unconventional-nav-and-layout`: Unusual navigation, asymmetric and app-like layouts. Styles: unusual-nav, hamburger-only, command-palette, floating-dock, anchor-only, unconventional-layout, asymmetric, experimental, app-shell, split-screen
+- `drag-and-horizontal-scroll`: Drag interactions and horizontal scrolling. Styles: drag-interaction, horizontal-scroll
+- `big-type-and-modes`: Oversized and expressive type, and theme switching. Styles: oversized-type, expressive-type, mode-switching
+- `editorial-serif-print`: Editorial, newspaper and serif-led layouts that read easily. Styles: editorial, serif-editorial, serif-display, newspaper, editorial-feed
+- `condensed-and-paired-type`: Condensed display type and serif-sans pairings. Styles: condensed, mixed-pairing
+- `swiss-utilitarian-corporate`: Swiss grids, utilitarian interfaces and corporate-clean pages that are not generic. Styles: swiss-grid, utilitarian, corporate-clean
+- `luxury-and-opulent`: Luxury and opulent styles: gold, thin type and ornament that stay readable. Styles: luxury, opulent
+- `bento-and-card-grids`: Bento, catalog and gallery grids that reflow and read in order. Styles: bento-grid, catalog-grid, gallery-wall
+- `hero-and-photography`: Photography-led and centered heroes with readable text and fast images. Styles: photography, hero-centered, standout-hero
+- `saas-proof-pricing-event`: SaaS stacks, single-column pages, social proof, pricing tables and event sites. Styles: saas-stack, single-column, standout-social-proof, standout-pricing, event-site
+- `dark-light-mixed-themes`: Dark, light and mixed-theme pages with their own checked palettes. Styles: dark, light, mixed-theme
+- `hover-micro-and-page-transitions`: Hover effects, micro-interactions and page transitions that work without a mouse. Styles: hover-effects, micro-interactions, page-transitions
+- `brutalist-hard-edge`: Brutalist, neo-brutalist and edgy styles that stay usable. Styles: brutalism, neo-brutalist, edgy
+- `playful-quirky-voice`: Playful, quirky and friendly voices that stay clear. Styles: playful, quirky, friendly
+- `maximalist-memphis-collage`: Maximalist, Memphis and collage layouts with order underneath. Styles: maximalist, memphis-playful, collage
+- `illustration-and-hand-drawn`: Illustration, hand-drawn and graphic-only art that stays accessible. Styles: illustration, illustrative, hand-drawn, graphics-only
+- `clay-skeuomorphic-dimensional`: Clay, skeuomorphic and dimensional UI with real edges and legible text. Styles: claymorphism, skeuomorphic, dimensional
+- `natural-organic-earthy`: Organic, botanical and earthy palettes that are not the reflex cream. Styles: organic-soft, botanical-natural, earthy
+- `atmospheric-full-bleed-hero`: Atmospheric full-bleed heroes with text you can read. Styles: atmospheric, hero-full-bleed
+- `tech-aesthetics-purple-retro`: Futuristic, purple-led and retro-computing looks without the default tells. Styles: futuristic-tech, hue-purple, retro-computing
+- `no-photography-physical-goods`: No photography exists (physical goods or services): the offer as the live object, type as image, or an honest gap. Styles: no-imagery, ecommerce-store, consumer-goods, specimen, professional-services, business-services
+- `urgent-help-route`: Urgent help routes on public-service and crisis pages: the emergency line once, a real phone route with hours, and the primary action still on the first screen. Styles: government-public, non-profit, medical, mental-health
+- `form-no-backend-and-privacy`: Forms with no backend: a mailto fallback, an honest success message, a privacy line and a rule for sensitive text. Styles: government-public, professional-services, local-community, non-profit
