@@ -1,6 +1,13 @@
 # Quality Bar: Distinctiveness
 Severity: blocker (never traded for style), major, minor, advisory. Labels: standard, evidence, craft-consensus, our-take.
 
+### `distinct-reference-not-brand` [major · our-take]
+A page rebuilt after a reference site ("make it like X") takes the reference's structure, proportions, sizes and motion, and none of its brand: not its name, copy, logo, illustrations or signature object, not a paid font it licenses, and not screenshots or pictures of its own product. Its signature object is replaced by one made from the subject's own world, and its picture slots hold the subject's own or properly credited material.
+- Why: Structure and rhythm are craft anyone may learn from; the name, words, art and licensed fonts are the reference's property, and a picture of the reference's own product on another site reads as an advertisement for it (the owner caught exactly that on the whata.design home, 2026-11-17). Replacing the reference's object with one from the subject's world (a keychain of interface parts on a site about interface design) is what made the rebuild read as the subject's own.
+- Check (manual): Put the rebuilt page beside the reference. List every name, sentence, logo, illustration, font family and picture on the rebuilt page that also appears on the reference, or that shows the reference's own product; each one is a finding. Then ask what the hero object is made of: if it is the reference's object recoloured, it is a finding. (tools: get_sections, get_section, render_sheet)
+- While designing: Measure the reference into the library first (get_sections, get_section) and copy its numbers, order and motion beats; draw the hero object from the subject's own parts; fill pictures from the subject or the library with credit; use a free or owned font with the same role.
+- Sources: whata-owner-review-2026-11-17
+
 ### `distinct-written-direction` [major · craft-consensus]
 Before building, a written direction file exists that names 4 to 6 colours with roles, the display, body and (if used) mono font roles, a radius scale, and the subject-derived lead element of the hero, and every colour, font family and border-radius value in the shipped CSS appears in that file.
 - Why: Four independent practitioner sources recommend fixing tokens up front (a 4 to 6 colour plan; exact tokens instead of adjectives like 'modern and clean'), and Impeccable ships rules that flag a font, colour, radius or font size outside a DESIGN.md. Vague adjective prompts are said to return the statistical average.

@@ -165,6 +165,13 @@ No image is shown stretched or squashed: its rendered aspect ratio matches its n
 - Often conflicts with styles: collage, brutalism, memphis-playful
 - Sources: webdev-design-responsive-images, mdn-object-fit, webdev-design-picture-element
 
+### `craft-inline-icon-cap-centred` [minor · our-take]
+An icon, chip or picture set inside a line of text is centred on the capital height of that text, about 1em square, with the space before it equal to the word space after it; it never sits on the baseline below the letters.
+- Why: A text-less inline-flex or inline-grid box aligns its bottom edge with the text baseline, so the chip hangs below the capitals and the line looks broken; the owner spotted this in the whata.design statement within seconds (2026-11-17). web.dev sizes icons in em so they follow the text.
+- Check (manual): For each img, svg or element without its own text inside an h1 to h3 or p: compare its vertical centre with the centre of the capitals of the surrounding text (baseline minus half the cap height, from a Range rect of a capital letter or font metrics). A difference over 8% of the font size, or a left gap differing from the right gap by more than 0.1em, is a finding. (tools: playwright)
+- While designing: Make the inline chip display: inline-block, width and height 1em (or the cap height), vertical-align: middle or a measured -0.1em to -0.15em offset; centre any icon inside with its own flex box; set margin-inline so the gaps match the word space.
+- Sources: whata-owner-review-2026-11-17, webdev-design-icons
+
 ### `craft-layout-balance` [minor · our-take]
 At desktop widths no section keeps all its content to one side and leaves a wide empty region next to it, unless the space is meant (a deliberate margin, a sticky rail, a pause between sections).
 - Why: Found when reviewing a real redesign: an accordion sat in a narrow left column at 1440 px and left the right side blank, which read as unfinished next to full-width sections. No source gives a number; the 40% content width and the 25%-of-width asymmetry limits are our own working thresholds, and the result is for a person to judge, not a fail.

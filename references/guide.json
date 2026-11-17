@@ -1,5 +1,5 @@
 {
-  "builtAt": "2026-11-17T20:17:21.277Z",
+  "builtAt": "2026-11-17T21:43:37.775Z",
   "process": {
     "version": 2,
     "notes": "The spine of the Learn library. Stages and steps are data; lessons, templates and style guides attach to steps by slug. `inputs` and `outputs` are named artifacts: every input must be produced by an earlier step in the full track. `uses` lists library or MCP tools relevant to the step. `sources` are ids in content/learn/sources.json. `loops` record where the process is expected to go back. `tracks` are shorter paths through the same steps; a track may skip steps, in which case their artifacts are marked not applicable. A track may also list `replaces`: for each step it runs, an input the track skips is named with the artifact that carries it in this track (`by`, one artifact or a list, produced by an earlier step of the track or by the step itself) or with `by: null` when the input is dropped, and `how` says what to write instead. validate-process.mjs checks that every input of a track step is produced in the track or listed in `replaces`.",
@@ -1929,6 +1929,7 @@
       "procedure": [
         "For each direction choose at most two type families with roles (display, body), a scale with named steps, and a measure for body text. Follow the craft rules for size, line length and line height. [Craft]",
         "Define the palette as named roles (background, surface, text, text-muted, accent, border, focus, and state colors). Compute contrast for every text/background pair and every UI/background pair with check_contrast; fix pairs that fail: normal text 4.5:1, large text and UI parts 3:1. [Standard]",
+        "Set the display headline's line height and letter spacing from the anchors, not by eye: get_craft lists each library site's displayLeading and displayTrackingEm, and compare_to_library flags a sketch whose titles are set looser than its anchors. Large type almost always wants tighter leading and slightly negative tracking than the body; owners notice loose titles before anything else (whata.design's owner asked twice in one evening). [Our take]",
         "State what the accent is for (one job) and keep the palette small. Reserve semantic colors for meaning. [Craft]",
         "Fonts: use only fonts you can ship. If the owner gave brand fonts, use them. Otherwise choose one of two, and write which and why. (a) A deliberate system stack is an allowed default (for example a native transitional serif, humanist or grotesque stack): name the stack and the reason, and warn that it renders differently per operating system (a stack that begins with Charter shows Charter on Apple devices, Cambria on Windows and something else on Android or Linux): check size, line length and line breaks with the fallback face too, and state which systems you did not see. (b) An open-licence web font, saved locally and self-hosted: look in places such as Fontsource, Google Fonts (download and self-host, do not link), or Open Foundry; these are names to look in, not endorsements, and licences differ per family, so read the licence file that comes with the font and record it in assets.md before relying on it. Check that the font file is present before you rely on it. Build-time self-hosting counts as self-hosting and needs no separate download approval: in a Next.js project `next/font/google` (or `next/font/local`) downloads an open-licence family at build and serves it from the site, with no runtime link; the same goes for a Fontsource package. A system stack is a last resort, not the owner-away default: in a real run the safe reading (dropping a web serif for Charter and Georgia) made the page look generic. Show the font on the directions sheet so the owner picks it with the look. Never link a font from a CDN you cannot reach offline, and never design with a font that will silently fall back to a different one. Check the fallback in the browser at the chosen sizes. [Craft]",
         "Do not use a reflex palette or font without a stated reason (see the distinctiveness rules). If you choose a common font or hue, write why."
@@ -2701,6 +2702,8 @@
         "Apply the direction's recipe steps and the component patterns. Keep the DOM order equal to the reading order; add a skip link; keep focus visible.",
         "Read the rule list for the build once before starting (get_guidelines topic: build) and keep generate_hints in mind; re-run review_design after each section and fix blockers immediately.",
         "Commit in small steps (if the project allows version control); keep a CHANGELOG of decisions that deviate from the tokens.",
+        "Rebuilding a page after a reference the owner names (\"duplicate X\", \"make it like X\"): measure X into the library first (get_sections and get_section give its order, sizes and motion beats) and copy those numbers; take nothing of its brand (`distinct-reference-not-brand`): its object becomes one made from the subject's world, its pictures come from the subject or the library with credit, and a paid font is replaced by a free one in the same role. Put the rebuild beside X at both sizes before the owner sees it.",
+        "Several agents building one site at once (a home and a wiki in parallel, say): before either writes styles, one of them puts every shared value in one tokens file (colours with their contrast, type, radii, container, gutter, section gap, header offset) loaded after the global CSS, and both read only those variables, never raw values. Agree in writing who owns which files and shared classes; a shared class is changed only by its owner, and a look the owner wants on one page only is scoped to that page. Each agent stages only its own files. Before any commit, the full build must pass with everyone's uncommitted edits in the tree (a type error in the other agent's file still breaks your deploy). A push deploys every local commit on the branch, the other agent's too: ask the owner before pushing work that is not yours, and tell the other agent the commit you pushed.",
         "Unconfirmed facts shown on the page (see protocol 3.2): mark each with the visible `.assumed` marker, never brackets, add a legend on the page, and list each in design/OPEN-QUESTIONS.md. For a marked phone number or address inside a link, follow the `<Assumed>` pattern in `rules/build.md` (a solid link underline plus an inner marker; one legend plus `aria-describedby`).",
         "Public-service or crisis audience: build the urgent route from the recipe `urgent-help-route` (the emergency-services line once, a `tel:` link with hours and an out-of-hours route, contrast and text instead of red alone) and check at 390x844 that it does not push the primary action below the first screen. Forms: build every form from `form-no-backend-and-privacy` (labels, `type`, `inputmode` and `autocomplete`, native `required`, the no-backend `mailto:` fallback with its honest success text, the privacy line, and no promise that anything was sent). If the audience flags the COGA rules, build to them as majors (`rules/build.md` lists all fifteen). [Our take]",
         "Legal, medical, financial or safety advice on the page: it stays under the draft marker and legend until a qualified person has reviewed it (`copy-expert-review-before-launch`); record the reviewer and the date or the open question in design/OPEN-QUESTIONS.md."
@@ -8075,6 +8078,31 @@
       "group": "craft"
     },
     {
+      "id": "craft-inline-icon-cap-centred",
+      "topic": "iconography: implementation",
+      "statement": "An icon, chip or picture set inside a line of text is centred on the capital height of that text, about 1em square, with the space before it equal to the word space after it; it never sits on the baseline below the letters.",
+      "why": "A text-less inline-flex or inline-grid box aligns its bottom edge with the text baseline, so the chip hangs below the capitals and the line looks broken; the owner spotted this in the whata.design statement within seconds (2026-11-17). web.dev sizes icons in em so they follow the text.",
+      "check": {
+        "type": "manual",
+        "how": "For each img, svg or element without its own text inside an h1 to h3 or p: compare its vertical centre with the centre of the capitals of the surrounding text (baseline minus half the cap height, from a Range rect of a capital letter or font metrics). A difference over 8% of the font size, or a left gap differing from the right gap by more than 0.1em, is a finding.",
+        "tools": [
+          "playwright"
+        ]
+      },
+      "severity": "minor",
+      "label": "our-take",
+      "sources": [
+        "whata-owner-review-2026-11-17",
+        "webdev-design-icons"
+      ],
+      "tension": [],
+      "generate_hint": "Make the inline chip display: inline-block, width and height 1em (or the cap height), vertical-align: middle or a measured -0.1em to -0.15em offset; centre any icon inside with its own flex box; set margin-inline so the gaps match the word space.",
+      "applies_to": [
+        "homepage"
+      ],
+      "group": "craft"
+    },
+    {
       "id": "craft-motion-duration-range",
       "topic": "motion: duration",
       "statement": "Functional UI transitions (hover, press, toggle, dropdown, tooltip, modal, drawer) last between 100ms and 400ms and none exceeds 500ms.",
@@ -9059,6 +9087,32 @@
       "group": "distinct"
     },
     {
+      "id": "distinct-reference-not-brand",
+      "topic": "Concept",
+      "statement": "A page rebuilt after a reference site (\"make it like X\") takes the reference's structure, proportions, sizes and motion, and none of its brand: not its name, copy, logo, illustrations or signature object, not a paid font it licenses, and not screenshots or pictures of its own product. Its signature object is replaced by one made from the subject's own world, and its picture slots hold the subject's own or properly credited material.",
+      "why": "Structure and rhythm are craft anyone may learn from; the name, words, art and licensed fonts are the reference's property, and a picture of the reference's own product on another site reads as an advertisement for it (the owner caught exactly that on the whata.design home, 2026-11-17). Replacing the reference's object with one from the subject's world (a keychain of interface parts on a site about interface design) is what made the rebuild read as the subject's own.",
+      "check": {
+        "type": "manual",
+        "how": "Put the rebuilt page beside the reference. List every name, sentence, logo, illustration, font family and picture on the rebuilt page that also appears on the reference, or that shows the reference's own product; each one is a finding. Then ask what the hero object is made of: if it is the reference's object recoloured, it is a finding.",
+        "tools": [
+          "get_sections",
+          "get_section",
+          "render_sheet"
+        ]
+      },
+      "severity": "major",
+      "label": "our-take",
+      "sources": [
+        "whata-owner-review-2026-11-17"
+      ],
+      "tension": [],
+      "generate_hint": "Measure the reference into the library first (get_sections, get_section) and copy its numbers, order and motion beats; draw the hero object from the subject's own parts; fill pictures from the subject or the library with credit; use a free or owned font with the same role.",
+      "applies_to": [
+        "homepage"
+      ],
+      "group": "distinct"
+    },
+    {
       "id": "distinct-review-against-published-criteria",
       "topic": "Process",
       "statement": "Before shipping, the page is reviewed against the four published Awwwards criteria (Design 40%, Usability 30%, Creativity 20%, Content 10%) with one piece of evidence recorded per criterion, and any criterion without evidence is treated as failing.",
@@ -9971,6 +10025,7 @@
       "craft-image-no-distortion",
       "craft-icons-one-family",
       "craft-icons-svg-currentcolor",
+      "craft-inline-icon-cap-centred",
       "craft-motion-duration-range",
       "craft-motion-easing-direction",
       "craft-motion-frequent-quick",
@@ -10004,6 +10059,7 @@
       "distinct-real-imagery-and-icons",
       "distinct-customize-library-defaults",
       "distinct-swap-test",
+      "distinct-reference-not-brand",
       "distinct-review-against-published-criteria"
     ],
     "usability": [

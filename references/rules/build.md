@@ -181,6 +181,9 @@
 ## craft / typography: units
 - [major] `craft-relative-units-text`: Write every font-size and text max-width in rem, em or ch, leave html font-size at 100%, and treat any px font-size as a bug.
 
+## distinct / Concept
+- [major] `distinct-reference-not-brand`: Measure the reference into the library first (get_sections, get_section) and copy its numbers, order and motion beats; draw the hero object from the subject's own parts; fill pictures from the subject or the library with credit; use a free or owned font with the same role.
+
 ## distinct / Direction before build
 - [major] `distinct-written-direction`: Write the direction file first, then use only the colours, faces, radii and sizes it names.
 
